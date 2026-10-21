@@ -1,0 +1,215 @@
+[
+ {
+  "circuit_id": "madring",
+  "season": 2026,
+  "source": "fia_circuit_map",
+  "source_url": "https://www.fia.com/system/files/decision-document/2026_spanish_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_and_emergency_exits_map.pdf",
+  "method": "FIA circuit-map turn labels aligned to the 2026 qualifying lap outline (similarity fit); distances along that lap",
+  "corners": [
+   {
+    "number": 1,
+    "letter": "",
+    "distance_m": 444
+   },
+   {
+    "number": 2,
+    "letter": "",
+    "distance_m": 481
+   },
+   {
+    "number": 3,
+    "letter": "",
+    "distance_m": 652
+   },
+   {
+    "number": 4,
+    "letter": "",
+    "distance_m": 1324
+   },
+   {
+    "number": 5,
+    "letter": "",
+    "distance_m": 1508
+   },
+   {
+    "number": 5,
+    "letter": "A",
+    "distance_m": 1537
+   },
+   {
+    "number": 6,
+    "letter": "",
+    "distance_m": 1585
+   },
+   {
+    "number": 7,
+    "letter": "",
+    "distance_m": 1881
+   },
+   {
+    "number": 8,
+    "letter": "",
+    "distance_m": 1978
+   },
+   {
+    "number": 9,
+    "letter": "",
+    "distance_m": 2074
+   },
+   {
+    "number": 10,
+    "letter": "",
+    "distance_m": 2212
+   },
+   {
+    "number": 11,
+    "letter": "",
+    "distance_m": 2338
+   },
+   {
+    "number": 12,
+    "letter": "",
+    "distance_m": 2660
+   },
+   {
+    "number": 13,
+    "letter": "",
+    "distance_m": 3203
+   },
+   {
+    "number": 14,
+    "letter": "",
+    "distance_m": 3421
+   },
+   {
+    "number": 15,
+    "letter": "",
+    "distance_m": 3663
+   },
+   {
+    "number": 16,
+    "letter": "",
+    "distance_m": 3862
+   },
+   {
+    "number": 17,
+    "letter": "",
+    "distance_m": 3930
+   },
+   {
+    "number": 18,
+    "letter": "",
+    "distance_m": 4167
+   },
+   {
+    "number": 19,
+    "letter": "",
+    "distance_m": 4321
+   },
+   {
+    "number": 20,
+    "letter": "",
+    "distance_m": 4700
+   },
+   {
+    "number": 20,
+    "letter": "A",
+    "distance_m": 4748
+   },
+   {
+    "number": 21,
+    "letter": "",
+    "distance_m": 4841
+   },
+   {
+    "number": 22,
+    "letter": "",
+    "distance_m": 5157
+   }
+  ]
+ },
+ {
+  "circuit_id": "kuala-lumpur",
+  "season": 2026,
+  "source": "fia_circuit_map",
+  "source_url": "https://www.fia.com/system/files/decision-document/2026_bahrain_grand_prix_in_malaysia_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "method": "FIA circuit-map turn labels aligned to the 2026 qualifying lap outline (similarity fit); distances along that lap",
+  "corners": [
+   {
+    "number": 1,
+    "letter": "",
+    "distance_m": 635
+   },
+   {
+    "number": 2,
+    "letter": "",
+    "distance_m": 731
+   },
+   {
+    "number": 3,
+    "letter": "",
+    "distance_m": 1035
+   },
+   {
+    "number": 4,
+    "letter": "",
+    "distance_m": 1463
+   },
+   {
+    "number": 5,
+    "letter": "",
+    "distance_m": 1858
+   },
+   {
+    "number": 6,
+    "letter": "",
+    "distance_m": 2085
+   },
+   {
+    "number": 7,
+    "letter": "",
+    "distance_m": 2440
+   },
+   {
+    "number": 8,
+    "letter": "",
+    "distance_m": 2653
+   },
+   {
+    "number": 9,
+    "letter": "",
+    "distance_m": 3082
+   },
+   {
+    "number": 10,
+    "letter": "",
+    "distance_m": 3202
+   },
+   {
+    "number": 11,
+    "letter": "",
+    "distance_m": 3486
+   },
+   {
+    "number": 12,
+    "letter": "",
+    "distance_m": 3801
+   },
+   {
+    "number": 13,
+    "letter": "",
+    "distance_m": 3970
+   },
+   {
+    "number": 14,
+    "letter": "",
+    "distance_m": 4142
+   },
+   {
+    "number": 15,
+    "letter": "",
+    "distance_m": 5067
+   }
+  ]
+ }
+]

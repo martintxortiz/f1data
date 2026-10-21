@@ -1,0 +1,50 @@
+[
+ {
+  "season": 2026,
+  "article": "C5.2.7",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_c_technical_-_iss_21_-_2026-10-19.pdf",
+  "summary": "ERS-K absolute electrical DC power ≤ 350 kW."
+ },
+ {
+  "season": 2026,
+  "article": "C5.2.8",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_c_technical_-_iss_21_-_2026-10-19.pdf",
+  "summary": "ERS-K propulsion power vs car speed. Without Overtake: P = 1800 − 5·v (kW) below 340 km/h, tapering to 0 at 345 km/h. With Overtake: P = 7100 − 20·v, 0 at 355 km/h. (iii) A reduced curve (250 kW below 310 km/h) applies on specified sectors during Race/Sprint power-limited periods."
+ },
+ {
+  "season": 2026,
+  "article": "C5.2.9",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_c_technical_-_iss_21_-_2026-10-19.pdf",
+  "summary": "Energy Store state-of-charge window ≤ 4 MJ while on track."
+ },
+ {
+  "season": 2026,
+  "article": "C5.2.10",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_c_technical_-_iss_21_-_2026-10-19.pdf",
+  "summary": "Recharge ≤ 8.5 MJ per lap. (i) Can be reduced to 7 MJ at low-harvest circuits. (ii) Can be reduced further for Qualifying/Sprint Qualifying. (iii) +0.5 MJ per lap with Overtake (B7.2)."
+ },
+ {
+  "season": 2026,
+  "article": "B7.1.1",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_b_sporting_-_iss_09_-_2026-10-01.pdf",
+  "summary": "Driver Adjustable Bodywork: Straight Mode = front-wing profiles and rear-wing flap in low-drag positions; partial activation (front wing only) in Low Grip conditions. The FIA publishes Activation Zones and Low Grip Activation Zones per circuit at least 4 weeks ahead; each zone start is signposted."
+ },
+ {
+  "season": 2026,
+  "article": "B7.1.2",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_b_sporting_-_iss_09_-_2026-10-01.pdf",
+  "summary": "The driver may activate only when the Control Electronics notify that it is enabled; in Low Grip conditions only partial activation, in the Low Grip zones."
+ },
+ {
+  "season": 2026,
+  "article": "B7.2.1",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_b_sporting_-_iss_09_-_2026-10-01.pdf",
+  "summary": "Per event the FIA sets power-curve adjustments, recharge limits, Detection Gap, and Detection/Activation Line lap distances, plus sector exceptions for power reduction."
+ },
+ {
+  "season": 2026,
+  "article": "B7.2.2-B7.2.3",
+  "document_url": "https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_b_sporting_-_iss_09_-_2026-10-01.pdf",
+  "summary": "Overtake (replaces DRS): in Race/Sprint it is activated at the Activation Line if the car was within the Detection Gap of another car at the Detection Line. Disabled under Safety Car and in Low Grip conditions."
+ }
+]

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F1 Circuit Explorer</title>
+<style>
+:root{--bg:#0e0f13;--panel:#16181f;--card:#1c1f28;--line:#262a35;--fg:#e8e9ee;--mut:#8b90a0;--s1:#ff4d6d;--s2:#3fa9ff;--s3:#ffd23f;--drs:#39ff88;--sm:#d36cff;--acc:#e10600}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+header h1{font-size:16px;margin:0 12px 0 0}header h1 b{color:var(--acc)}
+select,button{background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font:inherit;cursor:pointer}
+select{min-width:300px}
+.toggles{display:flex;gap:12px;margin-left:auto;color:var(--mut);font-size:13px;flex-wrap:wrap}.toggles label{cursor:pointer;user-select:none}
+main{display:grid;grid-template-columns:1fr 440px;height:calc(100% - 55px)}
+#map{position:relative;min-height:400px}#map svg{width:100%;height:100%;display:block}
+#legend{position:absolute;left:14px;bottom:12px;display:flex;gap:14px;font-size:12px;color:var(--mut);flex-wrap:wrap}
+#legend i{display:inline-block;width:18px;height:5px;border-radius:3px;margin-right:5px;vertical-align:middle}
+aside{background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:16px 18px}
+aside h2{margin:0;font-size:20px}.sub{color:var(--mut);margin:2px 0 12px}.small{font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 10px}.stat.wide{grid-column:span 2}
+.stat .k{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px}.stat .v{font-size:15px;font-weight:600}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mut);margin:18px 0 8px}
+.sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.sec{border-radius:8px;padding:7px 10px;background:var(--card);border-top:4px solid}
+.sec .v{font-weight:700;font-size:15px}.sec .k{font-size:11px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:500;font-size:11px;text-transform:uppercase}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.turn{cursor:pointer}tr.turn:hover,tr.turn.hl{background:#232736}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.warn{color:#ffb84d}a{color:#7fb8ff}
+footer{color:var(--mut);font-size:11px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+@media (max-width:900px){main{grid-template-columns:1fr;height:auto}#map{height:60vh}aside{border-left:0}}
+</style>
+</head>
+<body>
+<header>
+  <h1><b>F1</b> Circuit Explorer</h1>
+  <button id="prev" title="Previous (←)">◀</button><select id="sel"></select><button id="next" title="Next (→)">▶</button>
+  <div class="toggles">
+    <label><input type="radio" name="mode" value="sector" checked> Sectors</label>
+    <label><input type="radio" name="mode" value="speed"> Speed</label>
+    <label><input type="checkbox" data-zone="drs" checked> DRS</label>
+    <label><input type="checkbox" data-zone="straight_mode" checked> Straight Mode</label>
+    <label><input type="checkbox" id="tTurns" checked> Turns</label>
+    <label><input type="checkbox" id="tMs"> Marshal sectors</label>
+    <label><input type="checkbox" id="tMl"> Marshal lights</label>
+  </div>
+</header>
+<main><div id="map"><svg id="svg"></svg><div id="legend"></div></div><aside id="side"></aside></main>
+<script>
+const DATA = /*__DATA__*/null;
+const C = DATA.circuits, $ = s => document.querySelector(s);
+const SECTOR = {1:'#ff4d6d', 2:'#3fa9ff', 3:'#ffd23f'}, ZONE = {drs:'#39ff88', straight_mode:'#d36cff'};
+const ZONE_LABEL = {drs:'DRS', straight_mode:'Straight Mode'};
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const v = (x, unit='') => x == null ? '–' : x + unit;
+const km = m => m == null ? '–' : (m/1000).toFixed(3) + ' km';
+const lapTime = s => { if (s == null) return '–'; const h = Math.floor(s/3600), m = Math.floor(s%3600/60), r = (s%60).toFixed(3).padStart(6,'0');
+  return h ? `${h}:${String(m).padStart(2,'0')}:${r}` : m ? `${m}:${r}` : (+s).toFixed(3); };
+const zoneLen = (z, L) => z.start_m == null || z.end_m == null ? null : (z.end_m >= z.start_m ? z.end_m - z.start_m : L - z.start_m + z.end_m);
+const inZone = (d, z) => z.start_m <= z.end_m ? d >= z.start_m && d <= z.end_m : d >= z.start_m || d <= z.end_m;
+let idx = 0;
+C.forEach((c, i) => $('#sel').add(new Option(`${c.season} R${String(c.round).padStart(2,'0')} · ${c.circuit_name} (${c.country})`, i)));
+
+function render(){
+  const c = C[idx], t = c.track, L = c.lap_length_m; $('#sel').value = idx; history.replaceState(null, '', '#' + c.id);
+  const mode = document.querySelector('input[name=mode]:checked').value;
+  const P = t.x.map((x, i) => [x, -t.y[i]]);
+  const xs = P.map(p=>p[0]).concat(c.corners.map(k=>k.label_x)), ys = P.map(p=>p[1]).concat(c.corners.map(k=>-k.label_y));
+  const minx = Math.min(...xs), maxx = Math.max(...xs), miny = Math.min(...ys), maxy = Math.max(...ys);
+  const span = Math.max(maxx-minx, maxy-miny), pad = span*.06, u = span/1000;
+  const pl = pts => pts.map(p => p.join(',')).join(' ');
+  const near = d => t.distance_m.reduce((b, x, i) => Math.abs(x-d) < Math.abs(t.distance_m[b]-d) ? i : b, 0);
+  let s = `<polyline points="${pl(P.concat([P[0]]))}" fill="none" stroke="#000" stroke-width="${u*22}" stroke-linejoin="round" opacity=".6"/>`;
+  if (mode === 'sector') {
+    const b = c.sector_boundaries_m.map(d => d == null ? P.length-1 : near(d));
+    [[0,b[0]],[b[0],b[1]],[b[1],P.length-1]].forEach(([a,e],k) => { let pts = P.slice(a, e+1); if (k===2) pts.push(P[0]);
+      s += `<polyline points="${pl(pts)}" fill="none" stroke="${SECTOR[k+1]}" stroke-width="${u*12}" stroke-linejoin="round" stroke-linecap="round"/>`; });
+  } else {
+    const sp = t.speed_kph, lo = Math.min(...sp), hi = Math.max(...sp);
+    P.forEach((p, i) => { const q = P[(i+1)%P.length], f = ((sp[i]+sp[(i+1)%P.length])/2-lo)/(hi-lo);
+      s += `<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}" stroke="hsl(${(f*130).toFixed(0)},90%,55%)" stroke-width="${u*12}" stroke-linecap="round"/>`; });
+  }
+  const shown = type => document.querySelector(`[data-zone="${type}"]`).checked;
+  c.aero_zones.filter(z => shown(z.type) && z.start_m != null && z.end_m != null).forEach(z => {
+    const a = [], b = []; t.distance_m.forEach((d, i) => { if (inZone(d, z)) (z.start_m > z.end_m && d <= z.end_m ? b : a).push(P[i]); });
+    const pts = a.concat(b), col = ZONE[z.type], dash = z.end_basis === 'telemetry' ? `${u*14} ${u*8}` : `${u*18} ${u*6}`;
+    if (pts.length > 1) s += `<polyline points="${pl(pts)}" fill="none" stroke="${col}" stroke-width="${u*(z.type==='drs'?4:7)}" opacity="${z.type==='drs'?1:.6}" stroke-dasharray="${dash}" stroke-linecap="round"><title>${ZONE_LABEL[z.type]} ${z.name} (${z.season}): ${z.start_m}–${z.end_m} m</title></polyline>`;
+    if (z.activation) { const i = near(z.start_m);
+      if (z.low_grip_start_m != null && z.low_grip_start_m !== z.start_m) { const j = near(z.low_grip_start_m);
+        s += `<circle cx="${P[j][0]}" cy="${P[j][1]}" r="${u*5}" fill="#0e0f13" stroke="${col}" stroke-width="${u*2.5}"><title>${z.name} low-grip activation: ${esc(z.low_grip_activation)}</title></circle>`; }
+      s += `<circle cx="${P[i][0]}" cy="${P[i][1]}" r="${u*8}" fill="${col}" stroke="#fff" stroke-width="${u*2}"><title>${z.name} activation: ${esc(z.activation)}</title></circle>
+        <text x="${P[i][0]+u*14}" y="${P[i][1]-u*12}" fill="${col}" font-size="${u*17}" font-weight="700" stroke="#0e0f13" stroke-width="${u*4}" paint-order="stroke">${z.name}</text>`; }
+  });
+  const [x0,y0] = P[0], [x1,y1] = P[Math.min(3,P.length-1)], l = Math.hypot(x1-x0,y1-y0)||1, dx=(x1-x0)/l, dy=(y1-y0)/l, nx=-dy*u*22, ny=dx*u*22;
+  s += `<line x1="${x0-nx}" y1="${y0-ny}" x2="${x0+nx}" y2="${y0+ny}" stroke="#fff" stroke-width="${u*6}"/><line x1="${x0-nx}" y1="${y0-ny}" x2="${x0+nx}" y2="${y0+ny}" stroke="#111" stroke-width="${u*6}" stroke-dasharray="${u*5} ${u*5}"/>`;
+  const ax = x0+dx*u*45, ay = y0+dy*u*45;
+  s += `<path d="M${ax+dx*u*14},${ay+dy*u*14} L${ax-dy*u*8},${ay+dx*u*8} L${ax+dy*u*8},${ay-dx*u*8} Z" fill="#fff" opacity=".85"><title>Direction of travel</title></path>
+    <text x="${x0+nx*1.6}" y="${y0+ny*1.6}" fill="#fff" font-size="${u*20}" font-weight="700" text-anchor="middle" dominant-baseline="central">S/F</text>`;
+  if ($('#tMs').checked) c.marshal_sectors.forEach(m => s += `<circle cx="${m.x}" cy="${-m.y}" r="${u*6}" fill="#bbb"><title>Marshal sector ${m.number} (${m.distance_m} m)</title></circle><text x="${m.x+u*10}" y="${-m.y-u*10}" fill="#bbb" font-size="${u*13}">MS${m.number}</text>`);
+  if ($('#tMl').checked) c.marshal_lights.forEach(m => s += `<rect x="${m.x-u*4}" y="${-m.y-u*4}" width="${u*8}" height="${u*8}" fill="#ff9f1c"><title>Marshal light ${m.number} (${m.distance_m} m)</title></rect>`);
+  if ($('#tTurns').checked) c.corners.forEach((k, i) => { const lab = k.number + k.letter;
+    s += `<g class="corner" data-i="${i}"><line x1="${k.x}" y1="${-k.y}" x2="${k.label_x}" y2="${-k.label_y}" stroke="#777" stroke-width="${u*2}"/>
+      <circle cx="${k.label_x}" cy="${-k.label_y}" r="${u*17}" fill="#22252f" stroke="${SECTOR[k.sector]||'#888'}" stroke-width="${u*3}"/>
+      <text x="${k.label_x}" y="${-k.label_y}" fill="#fff" font-size="${u*(lab.length>2?13:17)}" font-weight="700" text-anchor="middle" dominant-baseline="central" pointer-events="none">${lab}</text>
+      <title>Turn ${lab} · ${k.distance_m} m · min ${v(k.min_speed_kph,' km/h')}</title></g>`; });
+  const svg = $('#svg'); svg.setAttribute('viewBox', [minx-pad, miny-pad, maxx-minx+2*pad, maxy-miny+2*pad].join(' ')); svg.innerHTML = s;
+  svg.querySelectorAll('.corner').forEach(g => { g.onmouseenter = () => hl(+g.dataset.i, true); g.onmouseleave = () => hl(+g.dataset.i, false); });
+  const types = [...new Set(c.aero_zones.map(z => z.type))].filter(shown);
+  $('#legend').innerHTML = (mode === 'sector' ? [1,2,3].map(k => `<span><i style="background:${SECTOR[k]}"></i>Sector ${k}</span>`).join('')
+      : `<span><i style="background:linear-gradient(90deg,hsl(0,90%,55%),hsl(130,90%,55%))"></i>${Math.min(...t.speed_kph)}–${Math.max(...t.speed_kph)} km/h</span>`)
+    + types.map(ty => `<span><i style="background:${ZONE[ty]}"></i>${ZONE_LABEL[ty]}${ty==='straight_mode'?' (● activation, ○ low grip; dashed = to next turn)':' (observed on fastest lap)'}</span>`).join('')
+    + `<span>Rotation ${c.rotation_deg}°</span>`;
+  side(c);
+}
+function hl(i, on){ const r = document.querySelector(`tr.turn[data-i="${i}"]`); if (r) r.classList.toggle('hl', on);
+  const g = document.querySelector(`.corner[data-i="${i}"] circle`); if (g) g.setAttribute('fill', on ? '#555' : '#22252f'); }
+const st = (k, val, wide) => `<div class="stat${wide?' wide':''}"><div class="k">${k}</div><div class="v">${val ?? '–'}</div></div>`;
+const muted = s => s ? ` <small style="color:var(--mut)">${s}</small>` : '';
+function side(c){
+  const f = c.fastest_lap, L = c.lap_length_m, sb = c.session_best_sectors, b = c.sector_boundaries_m;
+  let h = `<h2>${esc(c.circuit_name)}</h2><div class="sub">${esc(c.event_name)} ${c.season} · ${esc(c.location)}, ${esc(c.country)}${c.latitude_deg!=null?` · <a href="https://www.openstreetmap.org/?mlat=${c.latitude_deg}&mlon=${c.longitude_deg}#map=14/${c.latitude_deg}/${c.longitude_deg}" target="_blank" rel="noopener">${c.latitude_deg.toFixed(3)}, ${c.longitude_deg.toFixed(3)}</a>`:''}</div>`;
+  h += `<div class="grid">` + st('Lap length (telemetry)', km(L)) + st('Official length', km(c.official_length_m))
+    + st('FIA centreline', km(c.fia_centreline_m)) + st('Turns', c.corners.filter(k => !k.letter).length)
+    + st('Race laps', c.race_laps) + st('Opened / first GP', c.opened_year ? `${c.opened_year} / ${v(c.first_gp_year)}` : null)
+    + st('Altitude', v(c.altitude_m, ' m')) + st('Marshal sectors', c.marshal_sectors.length || null)
+    + st('Pit lane loss', c.pit_loss_s != null ? `${c.pit_loss_s.toFixed(1)} s` + muted(`SC ${v(c.pit_loss_sc_s?.toFixed(1))} / VSC ${v(c.pit_loss_vsc_s?.toFixed(1))}`) : null, true) + `</div>`;
+  h += `<h3>Fastest lap · ${esc(c.session_name)} ${esc(c.session_date)}</h3><div class="grid">`
+    + st('Driver', `${f.team_colour?`<span class="dot" style="background:#${f.team_colour}"></span>`:''}${esc(f.driver_name||f.driver_code)}` + muted(esc(f.team)), true)
+    + st('Lap time', lapTime(f.lap_time_s)) + st('Theoretical best', sb.length === 3 ? lapTime(sb.reduce((a, x) => a + x.time_s, 0)) : null)
+    + st('Top / min speed', `${f.top_speed_kph} / ${f.min_speed_kph} km/h`) + st('Average speed', v(f.avg_speed_kph, ' km/h'))
+    + st('Full throttle', v(f.full_throttle_pct, ' %')) + st('Braking', v(f.braking_pct, ' %'))
+    + st('Speed trap', v(f.speed_trap_kph, ' km/h')) + st('Session best trap', v(c.session_top_speed_trap_kph, ' km/h'))
+    + st('Intermediate 1 / 2', `${v(f.intermediate1_kph)} / ${v(f.intermediate2_kph)} km/h`) + st('Max RPM / gear', `${f.max_rpm} / ${f.max_gear}`)
+    + st('Gear changes', f.gear_changes) + st('Mini sectors', c.mini_sectors) + `</div>`;
+  h += `<h3>Sectors</h3><div class="sectors">` + [0,1,2].map(i => { const len = i===0 ? b[0] : i===1 ? b[1]-b[0] : L-b[1], best = sb.find(x => x.sector === i+1);
+    return `<div class="sec" style="border-color:${SECTOR[i+1]}"><div class="k">Sector ${i+1} · ${len!=null&&!isNaN(len)?(len/1000).toFixed(2)+' km':''}</div><div class="v">${lapTime(f.sector_times_s[i])}</div><div class="k">best ${best?`${lapTime(best.time_s)} (${esc(best.driver_code)})`:'–'}</div></div>`; }).join('') + `</div>`;
+  if (c.race_winner) h += `<h3>Race</h3><div class="grid">` + st('Winner', esc(c.race_winner) + muted(esc(c.race_winner_team)), true)
+    + st('Race time', lapTime(c.race_time_s)) + st('Race fastest lap', c.race_fastest_lap_s ? lapTime(c.race_fastest_lap_s) + muted(`${esc(c.race_fastest_lap_driver)} L${c.race_fastest_lap_number}`) : null) + `</div>`;
+  for (const type of ['drs', 'straight_mode']) {
+    const zs = c.aero_zones.filter(z => z.type === type), seasons = [...new Set(zs.map(z => z.season))];
+    if (!zs.length) continue;
+    h += `<h3>${ZONE_LABEL[type]} zones (${seasons.join(', ')})${seasons.some(s => s !== c.season) ? ' · drawn on the ' + c.season + ' map' : ''}</h3>
+      <table><tr><th>Zone</th>${type==='straight_mode'?'<th>Activation (normal / low grip)</th>':''}<th class="n">From</th><th class="n">To</th><th class="n">Length</th></tr>`
+      + zs.map(z => `<tr><td><span class="dot" style="background:${ZONE[type]}"></span><b>${z.name}</b></td>${type==='straight_mode'?`<td>${esc(z.activation)} / ${esc(v(z.low_grip_activation))}</td>`:''}
+        <td class="n">${v(z.start_m,' m')}${z.low_grip_start_m!=null&&z.low_grip_start_m!==z.start_m?`<br><small style="color:var(--mut)">low grip ${z.low_grip_start_m} m</small>`:''}</td><td class="n">${v(z.end_m,' m')}${z.end_basis==='next_turn'?'*':''}</td><td class="n">${v(zoneLen(z, L),' m')}</td></tr>`).join('') + `</table>`;
+    const urls = [...new Set(zs.map(z => z.source_url).filter(Boolean))];
+    h += `<div class="sub small">${type==='drs' ? 'Flap-open stretches observed on the fastest lap (OpenF1 drs ≥ 10).' : 'Activation points from the FIA circuit map. The FIA publishes no end points. *The end shown is the next numbered turn (indicative).'} Source: ${urls.map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener">${type==='drs'?'OpenF1':'FIA PDF'}${urls.length>1?' '+(i+1):''}</a>`).join(', ')}</div>`;
+  }
+  if (c.notes.length) h += `<div class="sub small warn">${c.notes.map(esc).join('<br>')}</div>`;
+  const e = c.energy_limits;
+  if (e) h += `<h3>Energy limits (${e.season} event)</h3><div class="grid">`
+    + st('Max recharge / lap (race)', `${v(e.max_recharge_race_mj,' MJ')}` + muted(`${v(e.max_recharge_race_overtake_mj,' MJ')} with Overtake`), true)
+    + st('Qualifying', v(e.max_recharge_qualifying_mj,' MJ')) + st('Practice', v(e.max_recharge_practice_mj,' MJ'))
+    + st('Power-limited distance', v(e.power_limited_distance_m,' m')) + st('Power reduction rate', v(e.power_reduction_rate_kw_per_s,' kW/s'))
+    + st('Alt. power curve sectors', esc(e.alt_power_curve_sectors), true)
+    + st('Overtake detection / activation', `${v(e.overtake_detection_m,' m')} / ${v(e.overtake_activation_m,' m')}`) + st('Detection gap', v(e.overtake_detection_gap_s,' s'))
+    + `</div><div class="sub small">Source: <a href="${esc(e.source_url)}" target="_blank" rel="noopener">FIA Power Unit Information</a> (null = not given or TBC in the document)</div>`;
+  const regs = DATA.regulations.filter(r => c.aero_zones.some(z => z.season === r.season) || r.season === c.season);
+  if (regs.length) h += `<h3>Energy &amp; aero rules (${[...new Set(regs.map(r => r.season))].join(', ')})</h3><table class="small">`
+    + regs.map(r => `<tr><td><a href="${esc(r.document_url)}" target="_blank" rel="noopener"><b>${esc(r.article)}</b></a></td><td>${esc(r.summary)}</td></tr>`).join('') + `</table>`;
+  h += `<h3>Turns${c.corners_source!=='multiviewer'?` <span class="warn" style="text-transform:none">(${esc(c.corners_source.replace(/_/g,' '))})</span>`:''}</h3><table><tr><th>Turn</th><th class="n">Distance</th><th class="n">Min speed</th><th class="n">Gear</th><th>Sector</th></tr>`
+    + c.corners.map((k, i) => `<tr class="turn" data-i="${i}"><td><b>${k.number}${k.letter}</b></td><td class="n">${k.distance_m} m</td><td class="n">${v(k.min_speed_kph,' km/h')}</td><td class="n">${v(k.min_gear)}</td><td><span class="dot" style="background:${SECTOR[k.sector]}"></span>S${v(k.sector)}</td></tr>`).join('') + `</table>`;
+  h += `<footer>${esc(c.official_event_name)}<br>Data: ${DATA.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join(' · ')}. Schema ${esc(DATA.schema_version)}, generated ${esc(DATA.generated_at)}. Not affiliated with Formula 1 or the FIA.</footer>`;
+  $('#side').innerHTML = h;
+  document.querySelectorAll('tr.turn').forEach(tr => { tr.onmouseenter = () => hl(+tr.dataset.i, true); tr.onmouseleave = () => hl(+tr.dataset.i, false); });
+}
+const go = d => { idx = (idx + d + C.length) % C.length; render(); };
+$('#prev').onclick = () => go(-1); $('#next').onclick = () => go(1); $('#sel').onchange = e => { idx = +e.target.value; render(); };
+document.querySelectorAll('.toggles input').forEach(i => i.onchange = render);
+document.addEventListener('keydown', e => { if (e.target.tagName === 'SELECT') return; if (e.key === 'ArrowLeft') go(-1); if (e.key === 'ArrowRight') go(1); });
+const start = C.findIndex(c => c.id === location.hash.slice(1)); if (start >= 0) idx = start;
+render();
+</script>
+</body>
+</html>

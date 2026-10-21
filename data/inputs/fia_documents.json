@@ -1,0 +1,1035 @@
+[
+ {
+  "circuit_id": "melbourne",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_australian_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_quarantine_zone.pdf",
+  "fia_centreline_m": 5278,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 50
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 2,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 20
+    },
+    "low_grip_activation": {
+     "turn": 2,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 45
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 5,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 85
+    },
+    "low_grip_activation": {
+     "turn": 5,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 125
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 8,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 35
+    },
+    "low_grip_activation": null
+   },
+   {
+    "name": "A5",
+    "activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 60
+    },
+    "low_grip_activation": null
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "shanghai",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_chinese_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_battery_containment_area_and_red_zone.pdf",
+  "fia_centreline_m": 5451,
+  "note": "FIA map also lists zone A5 with no activation point (n/a).",
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 16,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    },
+    "low_grip_activation": {
+     "turn": 16,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 150
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 4,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 60
+    },
+    "low_grip_activation": {
+     "turn": 4,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    },
+    "low_grip_activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 140
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 13,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 60
+    },
+    "low_grip_activation": {
+     "turn": 13,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 130
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "suzuka",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_japanese_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_battery_containment_area_and_red_zone.pdf",
+  "fia_centreline_m": 5807,
+  "note": "FIA map also lists zones A3-A5 with no activation point (n/a).",
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 18,
+     "letter": "",
+     "ref": "exit",
+     "offset_m": 0
+    },
+    "low_grip_activation": {
+     "turn": 18,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "exit",
+     "offset_m": 0
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 70
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "miami",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_miami_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 5412,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 19,
+     "letter": "",
+     "ref": "exit",
+     "offset_m": 0
+    },
+    "low_grip_activation": {
+     "turn": 19,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 70
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 8,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 165
+    },
+    "low_grip_activation": null
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 16,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    },
+    "low_grip_activation": {
+     "turn": 16,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 150
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "montreal",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_canadian_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_and_emergency_exits_map.pdf",
+  "fia_centreline_m": 4361,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 160
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 7,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 50
+    },
+    "low_grip_activation": {
+     "turn": 7,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 110
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 9,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 60
+    },
+    "low_grip_activation": null
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 11,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 30
+    },
+    "low_grip_activation": {
+     "turn": 11,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 120
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "monte-carlo",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_monaco_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 3337,
+  "note": "FIA map lists no Straight Mode activation zones (N/A).",
+  "straight_mode_zones": [],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "catalunya",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_barcelona-catalunya_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_and_emergency_exits_map.pdf",
+  "fia_centreline_m": 4657,
+  "note": "FIA map also lists zone A5 with no activation point (n/a).",
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 45
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 85
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "exit",
+     "offset_m": -40
+    },
+    "low_grip_activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "exit",
+     "offset_m": 0
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 5,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    },
+    "low_grip_activation": {
+     "turn": 5,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 9,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 40
+    },
+    "low_grip_activation": {
+     "turn": 9,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "spielberg",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_austrian_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 4326,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 110
+    },
+    "low_grip_activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 160
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 1,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 110
+    },
+    "low_grip_activation": {
+     "turn": 1,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 170
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    },
+    "low_grip_activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 160
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 8,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 10
+    },
+    "low_grip_activation": {
+     "turn": 8,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 60
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "silverstone",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_british_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 5891,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 18,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 65
+    },
+    "low_grip_activation": {
+     "turn": 18,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 115
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 5,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 55
+    },
+    "low_grip_activation": {
+     "turn": 5,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 115
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 7,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 155
+    },
+    "low_grip_activation": null
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 65
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 125
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "spa-francorchamps",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_belgian_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 7004,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 19,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 190
+    },
+    "low_grip_activation": {
+     "turn": 19,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 240
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 1,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 140
+    },
+    "low_grip_activation": {
+     "turn": 1,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 195
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 4,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 60
+    },
+    "low_grip_activation": {
+     "turn": 4,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 360
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 15,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 140
+    },
+    "low_grip_activation": {
+     "turn": 15,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 190
+    }
+   },
+   {
+    "name": "A5",
+    "activation": {
+     "turn": 17,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 80
+    },
+    "low_grip_activation": {
+     "turn": 17,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 110
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "hungaroring",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_hungarian_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 4381,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 40
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 1,
+     "letter": "A",
+     "ref": "entry",
+     "offset_m": 30
+    },
+    "low_grip_activation": {
+     "turn": 1,
+     "letter": "A",
+     "ref": "entry",
+     "offset_m": 100
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 50
+    },
+    "low_grip_activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 80
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 11,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 60
+    },
+    "low_grip_activation": {
+     "turn": 11,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "zandvoort",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_dutch_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_and_emergency_exits_map.pdf",
+  "fia_centreline_m": 4259,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 20
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 80
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 50
+    },
+    "low_grip_activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 120
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "monza",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_italian_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 5793,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 11,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 30
+    },
+    "low_grip_activation": {
+     "turn": 11,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 70
+    },
+    "low_grip_activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 110
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 7,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 170
+    },
+    "low_grip_activation": {
+     "turn": 7,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 230
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 130
+    },
+    "low_grip_activation": {
+     "turn": 10,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 180
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "madring",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_spanish_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_and_emergency_exits_map.pdf",
+  "fia_centreline_m": 5414,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 22,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 100
+    },
+    "low_grip_activation": {
+     "turn": 22,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 130
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 40
+    },
+    "low_grip_activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    }
+   }
+  ],
+  "energy_limits": {
+   "source_url": "https://www.fia.com/system/files/decision-document/2026_spanish_grand_prix_-_power_unit_information.pdf",
+   "max_recharge_race_mj": 8.5,
+   "max_recharge_race_overtake_mj": 9.0,
+   "max_recharge_qualifying_mj": 7.5,
+   "max_recharge_practice_mj": 9.0,
+   "power_limited_distance_m": 3206,
+   "power_reduction_rate_kw_per_s": 100,
+   "overtake_detection_m": null,
+   "overtake_activation_m": null,
+   "overtake_detection_gap_s": 1.0,
+   "alt_power_curve_sectors": "T5-T22 (1500-5100 m)"
+  }
+ },
+ {
+  "circuit_id": "baku",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_azerbaijan_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 6003,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 19,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 45
+    },
+    "low_grip_activation": {
+     "turn": 20,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 45
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 2,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 110
+    },
+    "low_grip_activation": {
+     "turn": 2,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 160
+    }
+   }
+  ],
+  "energy_limits": null
+ },
+ {
+  "circuit_id": "kuala-lumpur",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_bahrain_grand_prix_in_malaysia_-_competition_notes_-_circuit_map_pit_lane_drawing_emergency_exits_map_and_red_zone.pdf",
+  "fia_centreline_m": 5543,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 15,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 65
+    },
+    "low_grip_activation": {
+     "turn": 15,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 85
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 10
+    },
+    "low_grip_activation": {
+     "turn": 3,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 50
+    }
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 8,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 65
+    },
+    "low_grip_activation": {
+     "turn": 8,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 95
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 65
+    },
+    "low_grip_activation": {
+     "turn": 14,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 80
+    }
+   }
+  ],
+  "energy_limits": {
+   "source_url": "https://www.fia.com/system/files/decision-document/2026_bahrain_grand_prix_in_malaysia_-_power_unit_information.pdf",
+   "max_recharge_race_mj": 8.5,
+   "max_recharge_race_overtake_mj": 9.0,
+   "max_recharge_qualifying_mj": 7.5,
+   "max_recharge_practice_mj": 9.0,
+   "power_limited_distance_m": 3365,
+   "power_reduction_rate_kw_per_s": 100,
+   "overtake_detection_m": 5110,
+   "overtake_activation_m": 5160,
+   "overtake_detection_gap_s": 1.0,
+   "alt_power_curve_sectors": "T4-T7 (1550-2500 m), T9-T14 (3100-4100 m)"
+  }
+ },
+ {
+  "circuit_id": "singapore",
+  "season": 2026,
+  "circuit_map_url": "https://www.fia.com/system/files/decision-document/2026_singapore_grand_prix_-_competition_notes_-_circuit_map_pit_lane_drawing_and_emergency_exits_map.pdf",
+  "fia_centreline_m": 4927,
+  "note": null,
+  "straight_mode_zones": [
+   {
+    "name": "A1",
+    "activation": {
+     "turn": 19,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 30
+    },
+    "low_grip_activation": {
+     "turn": 19,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    }
+   },
+   {
+    "name": "A2",
+    "activation": {
+     "turn": 5,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 50
+    },
+    "low_grip_activation": null
+   },
+   {
+    "name": "A3",
+    "activation": {
+     "turn": 9,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 70
+    },
+    "low_grip_activation": {
+     "turn": 9,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 120
+    }
+   },
+   {
+    "name": "A4",
+    "activation": {
+     "turn": 13,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 115
+    },
+    "low_grip_activation": {
+     "turn": 13,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 165
+    }
+   },
+   {
+    "name": "A5",
+    "activation": {
+     "turn": 15,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 70
+    },
+    "low_grip_activation": {
+     "turn": 15,
+     "letter": "",
+     "ref": "after",
+     "offset_m": 90
+    }
+   }
+  ],
+  "energy_limits": null
+ }
+]
