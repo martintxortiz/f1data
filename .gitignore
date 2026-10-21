@@ -4,3 +4,7 @@ __pycache__/
 *.pyc
 *.pdf
 .env
+*.mcap
+*.parquet
+*.zip
+f1data-out/

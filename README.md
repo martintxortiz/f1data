@@ -18,6 +18,20 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python scripts/validate.py          # schema check (add --browser for a headless render test)
 ```
 
+## Session data (MCAP + Parquet)
+
+`f1pipe` downloads every session of a season from OpenF1 at native resolution and writes one Foxglove-ready `.mcap` file plus Parquet tables per session. The format is documented in [`docs/MCAP_FORMAT.md`](docs/MCAP_FORMAT.md). Published files are attached to [releases](https://github.com/martintxortiz/f1data/releases) (one per Grand Prix, tag `data-<season>-rNN-<country>`).
+
+```bash
+.venv/bin/python -m f1pipe update --season 2026              # new or missing sessions only (raw responses cached in .cache/openf1)
+.venv/bin/python -m f1pipe update --season 2026 --round 1    # one Grand Prix
+.venv/bin/python -m f1pipe update --season 2026 --session 11234 --force   # rebuild one session_key
+.venv/bin/python -m f1pipe status --season 2026              # coverage table
+.venv/bin/python -m f1pipe publish --season 2026             # upload new/changed files to GitHub releases (needs gh)
+```
+
+Output goes to `../f1data-out/<season>/<RR>_<country>/` (override with `F1PIPE_OUT`). A full season takes a few hours because of the OpenF1 rate limit (`F1PIPE_MIN_INTERVAL_S`, default 2.1 s); reruns are incremental. Each session is re-opened after writing and its message counts are checked against the source rows (`<session>.json` → `verify`).
+
 ## Sources
 
 | Source | Used for | Licence |
