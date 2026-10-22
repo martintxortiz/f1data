@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import gzip
+import http.client
 import json
 import os
 import time
@@ -24,7 +25,7 @@ def _throttle() -> None:
 
 
 def fetch(endpoint: str, params: dict[str, Any]) -> list[dict]:
-    """GET an endpoint. Returns [] when OpenF1 has no data. Backs off on 429/5xx."""
+    """GET an endpoint. Returns [] when OpenF1 has no data. Backs off on 429/5xx and retries truncated reads."""
     query = "&".join(f"{k}={urllib.parse.quote(str(v), safe=':-+.')}" for k, v in params.items())
     url = f"{BASE}{endpoint}?{query}"
     for attempt in range(10):
@@ -41,7 +42,8 @@ def fetch(endpoint: str, params: dict[str, Any]) -> list[dict]:
                 time.sleep(min(120, 10 * (attempt + 1)))
                 continue
             raise RuntimeError(f"HTTP {e.code} for {url}") from e
-        except (urllib.error.URLError, TimeoutError, ConnectionError):
+        except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.IncompleteRead, json.JSONDecodeError):
+            # dropped connections and truncated bodies are transient: retry the same request
             time.sleep(min(120, 5 * (attempt + 1)))
     raise RuntimeError(f"giving up on {url}")
 
